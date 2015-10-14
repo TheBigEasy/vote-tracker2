@@ -1,41 +1,48 @@
-var flow_arr = [];
-//
-var Flower = function(name, path) {
-	this.name = name;
-	this.path = path;
-	this.votes = 0;
+var imgL, imgR;
+
+var Photo = function(name, path) {
+  this.name = name;
+  this.path = path;
+  this.votes = 0;
 }
 
-//generates random number of array index 
-var getRandomPhoto = function(array) {
-    return array[Math.floor(Math.random() * array.length)];
+var f1 = new Photo('flower1', 'img/flower1.jpg');
+var f2 = new Photo('flower2', 'img/flower2.jpg');
+var f3 = new Photo('flower3', 'img/flower3.jpg');
+var f4 = new Photo('flower4', 'img/flower4.jpg');
+var f5 = new Photo('flower5', 'img/flower5.jpg');
+var f6 = new Photo('flower6', 'img/flower6.jpg');
+var f7 = new Photo('flower7', 'img/flower7.jpg');
+var f8 = new Photo('flower8', 'img/flower8.jpg');
+var f9 = new Photo('flower9', 'img/flower9.jpg');
+var f10 = new Photo('flower10', 'img/flower10.jpg');
+var f11 = new Photo('flower11', 'img/flower11.jpg');
+var f12 = new Photo('flower12', 'img/flower12.jpg');
+
+var tracker = {
+  flow_arr: [f1,f2,f3,f4,f5,f6,f7,f8,f9,f10,f11,f12], 
+};
+
+tracker.randNum = function() {
+// function randNum() {
+	return Math.floor(Math.random() * tracker.flow_arr.length);
 }
-//pushes new flower objects to flow_arr
-function newFlower(name, path) {
-	var x = new Flower(name, path);
-	flow_arr.push(x);
+
+tracker.twoImages = function() {
+  imgL = tracker.flow_arr[this.randNum()].path;
+  imgR = tracker.flow_arr[this.randNum()].path;
+
+  while (imgR === imgL){
+  	console.log('dup found');
+     imgR = tracker.flow_arr[this.randNum()].path;
+  }
+	console.log(imgL, imgR);
 }
 
-var loadPics = function() {
-  var imgL = document.getElementById('imageL');
-  var imgR = document.getElementById('imageR');
-  
-}
+var img1 = document.getElementById('imageL');
+var img2 = document.getElementById('imageR');
+tracker.twoImages();
 
-//creates instances of newFlower object
-newFlower('flower1', 'img/flower1.jpg');
-newFlower('flower2', 'img/flower2.jpg');
-newFlower('flower3', 'img/flower3.jpg');
-newFlower('flower4', 'img/flower4.jpg');
-newFlower('flower5', 'img/flower5.jpg');
-newFlower('flower6', 'img/flower6.jpg');
-newFlower('flower7', 'img/flower7.jpg');
-newFlower('flower8', 'img/flower8.jpg');
-newFlower('flower9', 'img/flower9.jpg');
-newFlower('flower10', 'img/flower10.jpg');
-newFlower('flower11', 'img/flower11.jpg');
-newFlower('flower12', 'img/flower12.jpg');
-
-
-
+img1.src = imgL;
+img2.src = imgR;
 
