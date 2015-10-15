@@ -1,23 +1,34 @@
 #logo {
-	font-family: 'Bree Serif', serif;
-	font-size: 7em;
-	color: #548b2c;
+	font-size: 6em;
+	text-align: center;
+	color: green;
 }
-.parent {
-	display: flex;
-	flex-direction: row;
-	flex-wrap: wrap;
-	justify-content: space-around;
+#bground {
+	background-repeat: no-repeat;
 }
-#imageHldrLft, #graphHldr, #imageHldrRt, {
-	flex-grow:1;
+.child{
+	display: inline;
+	margin:15px;
 }
 #imageL {
-	width: 80%;
+	width: 20%;
+	float: left;
+	margin-left: 75px;
+	border: 2px solid #66d625;
+	border-radius: 10px;
 }
 #imageR {
-	width: 80%;
+	width: 20%;
+	float: right;
+	margin-right: 75px;
+	border: 4px solid #66d625;
+	border-radius: 10px;
 }
-section {
-	display: inline;
+#myChart {
+	max-width: 300px;
+	max-height: 300px;
+	margin-left: 95px;
+	border: 4px solid #66d625;
+	border-radius: 250px;
+
 }

@@ -19,12 +19,12 @@ var f10 = new Photo('flower10', 'img/flower10.jpg');
 var f11 = new Photo('flower11', 'img/flower11.jpg');
 var f12 = new Photo('flower12', 'img/flower12.jpg');
 
+//tracker object
 var tracker = {
   flow_arr: [f1,f2,f3,f4,f5,f6,f7,f8,f9,f10,f11,f12], 
 };
 
 tracker.randNum = function() {
-// function randNum() {
 	return Math.floor(Math.random() * tracker.flow_arr.length);
 }
 
@@ -34,13 +34,13 @@ tracker.twoImages = function() {
 	var img1 = document.getElementById('imageL');
 	var img2 = document.getElementById('imageR');
 
-	img1.src = imgL.path;
-	img2.src = imgR.path;
 
   while (imgR === imgL){
   	console.log('dup found');
      imgR = tracker.flow_arr[this.randNum()];
   }
+    img1.src = imgL.path;
+	img2.src = imgR.path;
 	console.log(imgL, imgR);
 }
 // console.log("imageL", imgL);
@@ -140,7 +140,7 @@ var makeChart = function() {
 	    }
 	];
 	var ctx = document.getElementById("myChart").getContext("2d");
-	var myPolarAreaChart = new Chart(ctx).PolarArea(data);
+	var myDoughnutChart = new Chart(ctx).Doughnut(data);
 }
 makeChart();
 
