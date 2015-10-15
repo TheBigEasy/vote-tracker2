@@ -1,0 +1,23 @@
+#logo {
+	font-family: 'Bree Serif', serif;
+	font-size: 7em;
+	color: #548b2c;
+}
+.parent {
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+	justify-content: space-around;
+}
+#imageHldrLft, #graphHldr, #imageHldrRt, {
+	flex-grow:1;
+}
+#imageL {
+	width: 80%;
+}
+#imageR {
+	width: 80%;
+}
+section {
+	display: inline;
+}

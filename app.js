@@ -68,25 +68,79 @@ var makeChart = function() {
 	var data = [
 	    {
 	        value: f1.votes,
-	        color:"#F7464A",
-	        highlight: "#FF5A5E",
-	        label: "Red"
+	        color:"#0000e7",
+	        highlight: "#8282ba",
+	        label: "Flower1"
 	    },
 	    {
 	        value: f2.votes,
-	        color: "#46BFBD",
-	        highlight: "#5AD3D1",
-	        label: "Green"
+	        color: "#0015e7",
+	        highlight: "#8282ba",
+	        label: "Flower2"
 	    },	
 	    {
 	        value: f3.votes,
-	        color: "#FDB45C",
-	        highlight: "#FFC870",
-	        label: "Yellow"
+	        color: "#002ae7",
+	        highlight: "#8282ba",
+	        label: "Flower3"
+	    },
+	    {
+	        value: f4.votes,
+	        color: "#003fe7",
+	        highlight: "#8282ba",
+	        label: "Flower4"
+	    },
+	    {
+	        value: f5.votes,
+	        color: "#0055e7",
+	        highlight: "#8282ba",
+	        label: "Flower5"
+	    },
+	    {
+	        value: f6.votes,
+	        color: "#006ae7",
+	        highlight: "#8282ba",
+	        label: "Flower6"
+	    },
+	    {
+	        value: f7.votes,
+	        color: "#007fe7",
+	        highlight: "#8282ba",
+	        label: "Flower7"
+	    },
+	    {
+	        value: f8.votes,
+	        color: "#0094e7",
+	        highlight: "#8282ba",
+	        label: "Flower8"
+	    },
+	    {
+	        value: f9.votes,
+	        color: "#00aae7",
+	        highlight: "#8282ba",
+	        label: "Flower9"
+	    },
+	    {
+	        value: f10.votes,
+	        color: "#00bfe7",
+	        highlight: "#8282ba",
+	        label: "Flower10"
+	    },
+	    {
+	        value: f11.votes,
+	        color: "#00d4e7",
+	        highlight: "#8282ba",
+	        label: "Flower11"
+	    },
+	    {
+	        value: f12.votes,
+	        color: "#00e9e7",
+	        highlight: "#8282ba",
+	        label: "Flower12"
 	    }
 	];
 	var ctx = document.getElementById("myChart").getContext("2d");
-	var myDoughnutChart = new Chart(ctx).Doughnut(data);
+	var myPolarAreaChart = new Chart(ctx).PolarArea(data);
 }
 makeChart();
 
