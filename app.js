@@ -26,7 +26,8 @@ var tracker = {
 
 tracker.randNum = function() {
 	return Math.floor(Math.random() * tracker.flow_arr.length);
-}
+};
+// console.log(tracker.randNum());
 
 tracker.twoImages = function() {
   imgL = tracker.flow_arr[this.randNum()];
@@ -36,32 +37,52 @@ tracker.twoImages = function() {
 
 
   while (imgR === imgL){
-  	console.log('dup found');
+  	// console.log('dup found');
      imgR = tracker.flow_arr[this.randNum()];
   }
     img1.src = imgL.path;
 	img2.src = imgR.path;
-	console.log(imgL, imgR);
+	// console.log(imgL, imgR);
 }
-// console.log("imageL", imgL);
-	tracker.twoImages();
+
+
+//local Storage function
+var getScore = function() {
+	var retScore = localStorage.getItem('tracker');
+	var parseScore = JSON.parse(retScore);
+	// console.log(parseScore);
+	tracker.flow_arr = parseScore;
+	// console.dir(flow_arr);
+    makeChart();
+};
+
+	// console.log(parseScore);
+
+// console.log('imageL', imgL);
+
+
  
 var imgLeftButton = document.getElementById('imageL');
 imgLeftButton.addEventListener('click', function() {
-	console.log('imgL ' + imgL.votes);
+	// console.log('imgL ' + imgL.votes);
 	imgL.votes +=1;
+	var score = JSON.stringify(tracker.flow_arr);
+	localStorage.setItem('tracker', score);
+	getScore();
 	tracker.twoImages();
-	makeChart();
-	console.log(f1.votes);
+	// console.log(f1.votes);
 });
 
 var imgRightButton = document.getElementById('imageR');
 imgRightButton.addEventListener('click', function() {
-	console.log(imgR.votes);
+	// console.log(imgR.votes);
 	imgR.votes +=1;
+	var score = JSON.stringify(tracker.flow_arr);
+	localStorage.setItem('tracker', score);
+	console.log(score);
+	getScore();
 	tracker.twoImages();
-	makeChart();
-	console.log('imgR ' + imgR.votes);
+	// console.log('imgR ' + imgR.votes);
 });
 	   
 var makeChart = function() {
@@ -141,9 +162,8 @@ var makeChart = function() {
 	];
 	var ctx = document.getElementById("myChart").getContext("2d");
 	var myDoughnutChart = new Chart(ctx).Doughnut(data);
-}
-makeChart();
-
-// console.log('imageL', imgL);
+};
+tracker.twoImages();
+getScore();
 
 
