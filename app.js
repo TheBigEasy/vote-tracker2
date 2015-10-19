@@ -1,9 +1,16 @@
 var imgL, imgR;
 
+//tracker object
+var tracker = {
+  // flow_arr: [f1,f2,f3,f4,f5,f6,f7,f8,f9,f10,f11,f12], 
+  flow_arr: []
+};
+
 var Photo = function(fileName, path) {
   this.fileName = fileName;
   this.path = path;
   this.votes = 0;
+  tracker.flow_arr.push(this);
 }
 //object instances that go into array
 var f1 = new Photo('flower1', 'img/flower1.jpg');
@@ -19,10 +26,7 @@ var f10 = new Photo('flower10', 'img/flower10.jpg');
 var f11 = new Photo('flower11', 'img/flower11.jpg');
 var f12 = new Photo('flower12', 'img/flower12.jpg');
 
-//tracker object
-var tracker = {
-  flow_arr: [f1,f2,f3,f4,f5,f6,f7,f8,f9,f10,f11,f12], 
-};
+
 
 tracker.randNum = function() {
 	return Math.floor(Math.random() * tracker.flow_arr.length);
@@ -46,15 +50,15 @@ tracker.twoImages = function() {
 }
 
 
-//local Storage function
-var getScore = function() {
-	var retScore = localStorage.getItem('tracker');
-	var parseScore = JSON.parse(retScore);
-	// console.log(parseScore);
-	tracker.flow_arr = parseScore;
-	// console.dir(flow_arr);
-    makeChart();
-};
+// //local Storage function
+// var getScore = function() {
+// 	var retScore = localStorage.getItem('tracker');
+// 	var parseScore = JSON.parse(retScore);
+// 	// console.log(parseScore);
+// 	tracker.flow_arr = parseScore;
+// 	// console.dir(flow_arr);
+//     makeChart();
+// };
 
 	// console.log(parseScore);
 
@@ -64,97 +68,114 @@ var getScore = function() {
  
 var imgLeftButton = document.getElementById('imageL');
 imgLeftButton.addEventListener('click', function() {
-	// console.log('imgL ' + imgL.votes);
+
 	imgL.votes +=1;
-	var score = JSON.stringify(tracker.flow_arr);
-	localStorage.setItem('tracker', score);
-	getScore();
+	//put into local storage
+	var stringified_flow_arr = JSON.stringify(tracker.flow_arr);
+  localStorage.setItem('target', stringified_flow_arr);
+  //retrieve from local storage
+	var flow_arr_fromLS = localStorage.getItem('target');
+	tracker.flow_arr = JSON.parse(flow_arr_fromLS);
+
+	makeChart();
 	tracker.twoImages();
 	// console.log(f1.votes);
 });
 
 var imgRightButton = document.getElementById('imageR');
 imgRightButton.addEventListener('click', function() {
-	// console.log(imgR.votes);
+	
 	imgR.votes +=1;
-	var score = JSON.stringify(tracker.flow_arr);
-	localStorage.setItem('tracker', score);
-	console.log(score);
-	getScore();
+	//put into local storage
+	var stringified_flow_arr = JSON.stringify(tracker.flow_arr);
+  localStorage.setItem('target', stringified_flow_arr);
+  //retrieve from local storage
+	var flow_arr_fromLS = localStorage.getItem('target');
+	tracker.flow_arr = JSON.parse(flow_arr_fromLS);
+	
+  makeChart();
 	tracker.twoImages();
 	// console.log('imgR ' + imgR.votes);
 });
-	   
+var onloading = function() {
+	if (localStorage.getItem('target') !== null) {
+	var flow_arr_fromLS = localStorage.getItem('target');
+	tracker.flow_arr = JSON.parse(flow_arr_fromLS);
+  makeChart();
+	}
+	
+};
+
 var makeChart = function() {
 	var data = [
 	    {
-	        value: f1.votes,
+	        value: tracker.flow_arr[0].votes,
 	        color:"#0000e7",
 	        highlight: "#8282ba",
 	        label: "Flower1"
 	    },
 	    {
-	        value: f2.votes,
+	        value: tracker.flow_arr[1].votes,
 	        color: "#0015e7",
 	        highlight: "#8282ba",
 	        label: "Flower2"
 	    },	
 	    {
-	        value: f3.votes,
+	        value: tracker.flow_arr[2].votes,
 	        color: "#002ae7",
 	        highlight: "#8282ba",
 	        label: "Flower3"
 	    },
 	    {
-	        value: f4.votes,
+	        value: tracker.flow_arr[3].votes,
 	        color: "#003fe7",
 	        highlight: "#8282ba",
 	        label: "Flower4"
 	    },
 	    {
-	        value: f5.votes,
+	        value: tracker.flow_arr[4].votes,
 	        color: "#0055e7",
 	        highlight: "#8282ba",
 	        label: "Flower5"
 	    },
 	    {
-	        value: f6.votes,
+	        value: tracker.flow_arr[5].votes,
 	        color: "#006ae7",
 	        highlight: "#8282ba",
 	        label: "Flower6"
 	    },
 	    {
-	        value: f7.votes,
+	        value: tracker.flow_arr[6].votes,
 	        color: "#007fe7",
 	        highlight: "#8282ba",
 	        label: "Flower7"
 	    },
 	    {
-	        value: f8.votes,
+	        value: tracker.flow_arr[7].votes,
 	        color: "#0094e7",
 	        highlight: "#8282ba",
 	        label: "Flower8"
 	    },
 	    {
-	        value: f9.votes,
+	        value: tracker.flow_arr[8].votes,
 	        color: "#00aae7",
 	        highlight: "#8282ba",
 	        label: "Flower9"
 	    },
 	    {
-	        value: f10.votes,
+	        value: tracker.flow_arr[9].votes,
 	        color: "#00bfe7",
 	        highlight: "#8282ba",
 	        label: "Flower10"
 	    },
 	    {
-	        value: f11.votes,
+	        value: tracker.flow_arr[10].votes,
 	        color: "#00d4e7",
 	        highlight: "#8282ba",
 	        label: "Flower11"
 	    },
 	    {
-	        value: f12.votes,
+	        value: tracker.flow_arr[11].votes,
 	        color: "#00e9e7",
 	        highlight: "#8282ba",
 	        label: "Flower12"
@@ -164,6 +185,7 @@ var makeChart = function() {
 	var myDoughnutChart = new Chart(ctx).Doughnut(data);
 };
 tracker.twoImages();
-getScore();
+onloading();
+// getScore();
 
 
